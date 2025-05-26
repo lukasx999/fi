@@ -6,30 +6,45 @@
 // Vref = 1.1V
 
 
+
 ISR(ADC_vect) {
-    Serial.print("conversion complete: ");
+    Serial.print("Conversion complete: ");
     Serial.println(ADC);
 }
-
 
 void setup() {
     Serial.begin(9600);
 
-    // Voltage Reference
-    ADMUX &= ~(1 << REFS1);
-    ADMUX |=  (1 << REFS0);
+    // // Voltage Reference: AVcc
+    // ADMUX &= ~_BV(REFS1);
+    // ADMUX |=  _BV(REFS0);
 
-    // ADC2
-    ADMUX &= ~(1 << MUX3);
-    ADMUX |=  (1 << MUX2);
-    ADMUX &= ~(1 << MUX1);
-    ADMUX &= ~(1 << MUX0);
+    // Voltage Reference: Internal
+    ADMUX |= _BV(REFS1);
+    ADMUX |= _BV(REFS0);
+
+    // // ADC3
+    // ADMUX &= ~_BV(MUX3);
+    // ADMUX &= ~_BV(MUX2);
+    // ADMUX |=  _BV(MUX1);
+    // ADMUX |=  _BV(MUX0);
+
+    // ADC4
+    ADMUX &= ~_BV(MUX3);
+    ADMUX |=  _BV(MUX2);
+    ADMUX &= ~_BV(MUX1);
+    ADMUX &= ~_BV(MUX0);
 
     // ADC Enable
-    ADCSRA |= (1 << ADEN);
+    ADCSRA |= _BV(ADEN);
 
     // Enable ADC Interrupt
-    ADCSRA |= (1 << ADIE);
+    ADCSRA |= _BV(ADIE);
+
+    // Set prescaler to 64
+    ADCSRA |=  _BV(ADPS2);
+    ADCSRA |=  _BV(ADPS1);
+    ADCSRA &= ~_BV(ADPS0);
 
     // Enable Global Interrupts
     sei();
@@ -37,8 +52,8 @@ void setup() {
 }
 
 void loop() {
-    delay(100);
 
     // Start Conversion
-    ADCSRA |= (1 << ADSC);
+    ADCSRA |= _BV(ADSC);
+
 }

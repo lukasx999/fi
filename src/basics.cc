@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-void _setup() {
+void __setup() {
 
     // Set bit to 1
     PORTD = PORTD | (1 << PORTD5);
