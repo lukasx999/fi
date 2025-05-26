@@ -1,0 +1,4 @@
+#-mmcu=atmega328p
+-D__AVR_ATmega328P__
+--sysroot=/usr/avr
+-I/home/lukas/.platformio/packages/framework-arduino-avr/cores/arduino
