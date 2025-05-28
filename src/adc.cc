@@ -5,14 +5,12 @@
 // adc = (Vin*1024) / Vref
 // Vref = 1.1V
 
+// ISR(ADC_vect) {
+//     Serial.print("Conversion complete: ");
+//     Serial.println(ADC);
+// }
 
-
-ISR(ADC_vect) {
-    Serial.print("Conversion complete: ");
-    Serial.println(ADC);
-}
-
-void setup() {
+void ____setup() {
     Serial.begin(9600);
 
     // // Voltage Reference: AVcc
@@ -51,7 +49,7 @@ void setup() {
 
 }
 
-void loop() {
+void ___loop() {
 
     // Start Conversion
     ADCSRA |= _BV(ADSC);

@@ -30,12 +30,12 @@ static void reset_timer() {
     TCNT1 = timer_max - fcpu/prescaler;
 }
 
-ISR(TIMER1_OVF_vect) {
-    Serial.println("Timer Overflow!");
-    // Flip PD5
-    PORTD ^= _BV(PORTD5);
-    reset_timer();
-}
+// ISR(TIMER1_OVF_vect) {
+//     Serial.println("Timer Overflow!");
+//     // Flip PD5
+//     PORTD ^= _BV(PORTD5);
+//     reset_timer();
+// }
 
 void _setup() {
     Serial.begin(9600);
