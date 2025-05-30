@@ -12,7 +12,7 @@
 // fcpu  = 16,000,000Hz
 // fcpu  = fcpu / 1024
 // fcpu  = 15625Hz
-// T     =  1 / gcpu
+// T     =  1 / fcpu
 // T     = 0.000064s
 // 4.19s = T * 65535 // counts up to 65535 every 4.19s
 // 1s    = T * x     // how far it should count to for 1s
@@ -30,12 +30,12 @@ static void reset_timer() {
     TCNT1 = timer_max - fcpu/prescaler;
 }
 
-// ISR(TIMER1_OVF_vect) {
-//     Serial.println("Timer Overflow!");
-//     // Flip PD5
-//     PORTD ^= _BV(PORTD5);
-//     reset_timer();
-// }
+ISR(TIMER1_OVF_vect) {
+    Serial.println("Timer Overflow!");
+    // Flip PD5
+    PORTD ^= _BV(PORTD5);
+    reset_timer();
+}
 
 void _setup() {
     Serial.begin(9600);

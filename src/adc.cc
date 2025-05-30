@@ -5,10 +5,10 @@
 // adc = (Vin*1024) / Vref
 // Vref = 1.1V
 
-// ISR(ADC_vect) {
-//     Serial.print("Conversion complete: ");
-//     Serial.println(ADC);
-// }
+ISR(ADC_vect) {
+    Serial.print("Conversion complete: ");
+    Serial.println(ADC);
+}
 
 void ____setup() {
     Serial.begin(9600);
@@ -20,12 +20,6 @@ void ____setup() {
     // Voltage Reference: Internal
     ADMUX |= _BV(REFS1);
     ADMUX |= _BV(REFS0);
-
-    // // ADC3
-    // ADMUX &= ~_BV(MUX3);
-    // ADMUX &= ~_BV(MUX2);
-    // ADMUX |=  _BV(MUX1);
-    // ADMUX |=  _BV(MUX0);
 
     // ADC4
     ADMUX &= ~_BV(MUX3);
